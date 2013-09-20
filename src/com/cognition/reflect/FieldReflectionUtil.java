@@ -18,18 +18,6 @@ public final class FieldReflectionUtil {
     }
 
     /**
-     * Returns true if the specified field is a java primitive type.
-     * 
-     * @return true if the field is a primitive type or false otherwise.
-     */
-    public static boolean isPrimitive(Field f) {
-        if (f == null)
-            throw new IllegalArgumentException("f cannot be null");
-
-        return ClassReflectionUtil.isPrimitive(f.getType());
-    }
-
-    /**
      * Removes all the keys from a map that have a primitive type. The map
      * passed into the function is untouched.
      * 
@@ -42,8 +30,9 @@ public final class FieldReflectionUtil {
 
         for (Entry<Field, Object> e : fieldMap.entrySet()) {
             Field key = e.getKey();
-            if (!isPrimitive(key))
+            if (!ClassReflectionUtil.isPrimitive(key.getType())) {
                 result.put(e.getKey(), e.getValue());
+            }
 
         }
 
