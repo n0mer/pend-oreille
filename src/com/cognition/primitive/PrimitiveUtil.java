@@ -8,7 +8,40 @@ public final class PrimitiveUtil {
 
     }
 
+    /**
+     * Throw an exception if the length of the array is not evenly divisible by
+     * {@code div}.
+     * 
+     * @param array the array to check.
+     * @param mod the number to use in the modulus calculation
+     * @throws IllegalArgumentException if {@code array.length % div != 0}; if
+     *             div <= 0; or if array == null.
+     */
+    private static final void throwIfBadArray(byte[] array, int div) {
+
+        if (array == null) {
+            throw new IllegalArgumentException("array cannot be null");
+        }
+
+        if (div <= 0) {
+            throw new IllegalArgumentException("div must be >= 0");
+        }
+
+        if ((array.length % 2) != 0) {
+            throw new IllegalArgumentException("array length is not evenly divisible by " + div);
+        }
+
+    }
+
+    /**
+     * Converts an array of bytes into an array of shorts.
+     * 
+     * @param array the array to convert
+     * @return an array of short values.
+     */
     public static final short[] toShortArray(byte[] array) {
+
+        throwIfBadArray(array, 2);
 
         short[] result = new short[array.length / 2];
         for (int i = 0; i < array.length; i += 2) {
@@ -27,7 +60,7 @@ public final class PrimitiveUtil {
      * @return an array of integers.
      */
     public static final int[] toIntArray(byte[] array) {
-
+        throwIfBadArray(array, 4);
         int[] result = new int[array.length / 4];
         for (int i = 0; i < array.length; i += 4) {
             result[i / 4] = toInt(array, i);
@@ -38,7 +71,7 @@ public final class PrimitiveUtil {
     }
 
     public static final long[] toLongArray(byte[] array) {
-
+        throwIfBadArray(array, 8);
         long[] result = new long[array.length / 8];
         for (int i = 0; i < array.length; i += 8) {
             result[i / 8] = toLong(array, i);
@@ -49,7 +82,7 @@ public final class PrimitiveUtil {
     }
 
     public static final float[] toFloatArray(byte[] array) {
-
+        throwIfBadArray(array, 4);
         float[] result = new float[array.length / 4];
         for (int i = 0; i < array.length; i += 4) {
             result[i / 4] = toFloat(array, i);
@@ -60,7 +93,7 @@ public final class PrimitiveUtil {
     }
 
     public static final double[] toDoubleArray(byte[] array) {
-
+        throwIfBadArray(array, 8);
         double[] result = new double[array.length / 8];
         for (int i = 0; i < array.length; i += 8) {
             result[i / 8] = toDouble(array, i);
@@ -70,8 +103,31 @@ public final class PrimitiveUtil {
 
     }
 
+    /**
+     * makes sure that there are enough bytes in the array to make a conversion
+     * 
+     * @param array the array to check
+     * @param start the index of the array to start checking at
+     * @param bytesRequired the number of bytes, including {@code start} that
+     *            must be available.
+     * @throws IllegalArgumentException if array is null or there aren't enough
+     *             bytes to perform a converstion.
+     */
+    private static final void throwIfBadArraySize(byte[] array, int start, int bytesRequried) {
+
+        if (array == null) {
+            throw new IllegalArgumentException("array cannot be null");
+        }
+
+        if (array.length - start < bytesRequried) {
+            throw new IllegalArgumentException(bytesRequried + " bytes needed starting at " + start
+                    + ". found " + (array.length - bytesRequried));
+        }
+    }
+
     public static final short toShort(byte[] array, int start) {
 
+        throwIfBadArraySize(array, start, 2);
         int b1 = array[start] & 0xff;
         int b2 = array[start + 1] & 0xff;
         return (short) ((b1 << 8) + b2);
@@ -87,6 +143,7 @@ public final class PrimitiveUtil {
      * @return an integer built out of the next four bytes of the array.
      */
     public static final int toInt(byte[] array, int start) {
+        throwIfBadArray(array, 4);
         int b1 = array[start] & 0xff;
         int b2 = array[start + 1] & 0xff;
         int b3 = array[start + 2] & 0xff;
