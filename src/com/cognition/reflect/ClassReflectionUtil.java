@@ -51,11 +51,21 @@ public final class ClassReflectionUtil {
      */
     public static boolean isPrimitive(Class<?> c) {
 
-        if (c == null)
+        if (c == null) {
             throw new IllegalArgumentException("c cannot be null");
+        }
 
         if (c.isPrimitive()) {
             return true;
+        }
+
+        return isPrimitiveArray(c);
+
+    }
+
+    public static boolean isPrimitiveArray(Class<?> c) {
+        if (c == null) {
+            throw new IllegalArgumentException("c cannot be null");
         }
 
         for (Class<?> pClass : PRIMITIVE_BOX_TYPES) {
