@@ -180,7 +180,7 @@ public final class PrimitiveUtil {
         }
     }
 
-       public static final short toShort(byte[] array, int start) {
+    public static final short toShort(byte[] array, int start) {
 
         throwIfBadArraySize(array, start, 2);
         int b1 = array[start] & 0xff;
@@ -248,7 +248,7 @@ public final class PrimitiveUtil {
 
         byte[] result = new byte[array.length * 2];
         for (int i = 0; i < array.length; i++) {
-            toBytes(array[i], result, i * 2);
+            toBytes(array[i] == null ? 0 : array[i], result, i * 2);
         }
 
         return result;
@@ -258,7 +258,7 @@ public final class PrimitiveUtil {
 
         byte[] result = new byte[array.length * 4];
         for (int i = 0; i < array.length; i++) {
-            toBytes(array[i], result, i * 4);
+            toBytes(array[i] == null ? 0 : array[i], result, i * 4);
         }
 
         return result;
@@ -268,7 +268,7 @@ public final class PrimitiveUtil {
 
         byte[] result = new byte[array.length * 8];
         for (int i = 0; i < array.length; i++) {
-            toBytes(array[i], result, i * 8);
+            toBytes(array[i] == null ? 0 : array[i], result, i * 8);
         }
 
         return result;
@@ -278,7 +278,7 @@ public final class PrimitiveUtil {
 
         byte[] result = new byte[array.length * 4];
         for (int i = 0; i < array.length; i++) {
-            toBytes(array[i], result, i * 4);
+            toBytes(array[i] == null ? 0 : array[i], result, i * 4);
         }
 
         return result;
@@ -289,7 +289,7 @@ public final class PrimitiveUtil {
         byte[] result = new byte[array.length * 8];
         for (int i = 0; i < array.length; i++) {
             if (array[i] != null) {
-                toBytes(array[i], result, i * 8);
+                toBytes(array[i] == null ? 0 : array[i], result, i * 8);
             }
         }
 
@@ -304,7 +304,7 @@ public final class PrimitiveUtil {
 
         boolean[] bArray = new boolean[array.length];
         for (int i = 0; i < array.length; i++) {
-            bArray[i] = array[i];
+            bArray[i] = array[i] == null ? false : array[i];
         }
 
         return toBytes(bArray);
@@ -319,7 +319,7 @@ public final class PrimitiveUtil {
 
         char[] bArray = new char[array.length];
         for (int i = 0; i < array.length; i++) {
-            bArray[i] = array[i];
+            bArray[i] = array[i] == null ? '\u0000' : array[i];
         }
 
         return toBytes(bArray);
