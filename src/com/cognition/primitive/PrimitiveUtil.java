@@ -126,10 +126,6 @@ public final class PrimitiveUtil {
         short resultSz = toShort(array, 0);
         boolean[] result = new boolean[resultSz];
 
-        if ((resultSz % 8) != 0) {
-            resultSz++;
-        }
-
         for (int i = 0; i < resultSz; i++) {
             int bytePos = 2 + (i / 8);
             int bitPos = i & 8;
@@ -493,6 +489,14 @@ public final class PrimitiveUtil {
 
     }
 
+    public static Byte[] box(byte[] array) {
+        Byte[] result = new Byte[array.length];
+        for (int i = 0; i < array.length; i++) {
+            result[i] = Byte.valueOf(array[i]);
+        }
+        return result;
+    }
+
     public static final Short[] box(short[] array) {
         Short[] result = new Short[array.length];
         for (int i = 0; i < array.length; i++) {
@@ -549,10 +553,18 @@ public final class PrimitiveUtil {
         return result;
     }
 
+    public static byte[] unbox(Byte[] array) {
+        byte[] result = new byte[array.length];
+        for (int i = 0; i < array.length; i++) {
+            result[i] = array[i] == null ? 0 : array[i].byteValue();
+        }
+        return result;
+    }
+
     public static short[] unbox(Short[] array) {
         short[] result = new short[array.length];
         for (int i = 0; i < array.length; i++) {
-            result[i] = array[i].shortValue();
+            result[i] = array[i] == null ? 0 : array[i].shortValue();
         }
 
         return result;
@@ -561,7 +573,7 @@ public final class PrimitiveUtil {
     public static int[] unbox(Integer[] array) {
         int[] result = new int[array.length];
         for (int i = 0; i < array.length; i++) {
-            result[i] = array[i].intValue();
+            result[i] = array[i] == null ? 0 : array[i].intValue();
         }
 
         return result;
@@ -570,7 +582,7 @@ public final class PrimitiveUtil {
     public static long[] unbox(Long[] array) {
         long[] result = new long[array.length];
         for (int i = 0; i < array.length; i++) {
-            result[i] = array[i].longValue();
+            result[i] = array[i] == null ? 0 : array[i].longValue();
         }
 
         return result;
@@ -579,7 +591,7 @@ public final class PrimitiveUtil {
     public static float[] unbox(Float[] array) {
         float[] result = new float[array.length];
         for (int i = 0; i < array.length; i++) {
-            result[i] = array[i].floatValue();
+            result[i] = array[i] == null ? 0.0f : array[i].floatValue();
         }
 
         return result;
@@ -588,7 +600,7 @@ public final class PrimitiveUtil {
     public static double[] unbox(Double[] array) {
         double[] result = new double[array.length];
         for (int i = 0; i < array.length; i++) {
-            result[i] = array[i].doubleValue();
+            result[i] = array[i] == null ? 0.0d : array[i].doubleValue();
         }
 
         return result;
@@ -597,7 +609,7 @@ public final class PrimitiveUtil {
     public static boolean[] unbox(Boolean[] array) {
         boolean[] result = new boolean[array.length];
         for (int i = 0; i < array.length; i++) {
-            result[i] = array[i].booleanValue();
+            result[i] = array[i] == null ? false : array[i].booleanValue();
         }
 
         return result;
@@ -606,25 +618,10 @@ public final class PrimitiveUtil {
     public static char[] unbox(Character[] array) {
         char[] result = new char[array.length];
         for (int i = 0; i < array.length; i++) {
-            result[i] = array[i].charValue();
+            result[i] = array[i] == null ? '\u0000' : array[i].charValue();
         }
 
         return result;
     }
 
-    public static Byte[] box(byte[] array) {
-        Byte[] result = new Byte[array.length];
-        for (int i = 0; i < array.length; i++) {
-            result[i] = Byte.valueOf(array[i]);
-        }
-        return result;
-    }
-
-    public static byte[] unbox(Byte[] array) {
-        byte[] result = new byte[array.length];
-        for (int i = 0; i < array.length; i++) {
-            result[i] = array[i].byteValue();
-        }
-        return result;
-    }
 }

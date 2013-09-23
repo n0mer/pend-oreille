@@ -158,7 +158,7 @@ public final class ArrayBackedPrimitive {
         }
 
         if (type == Float[].class) {
-            // return PrimitiveUtil.box(PrimitiveUtil.toFloatArray(array));
+            return PrimitiveUtil.box(PrimitiveUtil.toFloatArray(array));
         }
 
         if (type == double[].class) {
