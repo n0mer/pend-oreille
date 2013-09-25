@@ -179,11 +179,10 @@ public final class PrimitiveUtil {
     public static final short toShort(byte[] array, int start) {
 
         throwIfBadArraySize(array, start, 2);
-        int b1 = (array[start] & 0xff) << 8;
-        int b2 = array[start + 1] & 0xff;
-        short result = (short) (b1 | b2);
-        return result;
-        // return (short) ((b1 << 8) + b2);
+        short s1 = (short) (array[start] & 0xff);
+        short s2 = (short) (array[start + 1] & 0xff);
+
+        return (short) ((s1 << 8) | s2);
 
     }
 
@@ -197,13 +196,11 @@ public final class PrimitiveUtil {
      */
     public static final int toInt(byte[] array, int start) {
         throwIfBadArraySize(array, start, 4);
-        int b1 = (array[start] & 0xff) << 24;
-        int b2 = (array[start + 1] & 0xff) << 16;
-        int b3 = (array[start + 2] & 0xff) << 8;
-        int b4 = array[start + 3] & 0xff;
-        int result = b1 | b2 | b3 | b4;
-        return result;
-        // return ((b1 << 24) + (b2 << 16) + (b3 << 8) + b4);
+
+        int i1 = toShort(array, start);
+        int i2 = toShort(array, start + 2);
+
+        return (i1 << 16) | i2;
 
     }
 
@@ -213,8 +210,7 @@ public final class PrimitiveUtil {
         long l1 = toInt(array, start);
         long l2 = toInt(array, start + 4);
 
-        long result = (l1 << 32) | l2;
-        return result;
+        return (l1 << 32) | l2;
 
     }
 
@@ -235,9 +231,7 @@ public final class PrimitiveUtil {
         throwIfBadArraySize(array, start, 2);
         int b1 = (array[start] & 0xff) << 8;
         int b2 = array[start + 1] & 0xff;
-        char result = (char) (b1 | b2);
-        return result;
-        // return (char) ((b1 << 8) + b2);
+        return (char) (b1 | b2);
 
     }
 
@@ -452,19 +446,20 @@ public final class PrimitiveUtil {
 
     public static final void toBytes(int value, byte[] dest, int start) {
 
-        dest[start] = (byte) (value >>> 24);
-        dest[start + 1] = (byte) (value >>> 16);
-        dest[start + 2] = (byte) (value >>> 8);
-        dest[start + 3] = (byte) value;
+        short s1 = (short) (value >>> 16);
+        short s2 = (short) value;
+
+        toBytes(s1, dest, start);
+        toBytes(s2, dest, start + 2);
 
     }
 
     public static final void toBytes(long value, byte[] dest, int start) {
-        long l1 = value >> 32;
-        long l2 = (int) value;
+        int i1 = (int) (value >>> 32);
+        int i2 = (int) value;
 
-        toBytes((int) l1, dest, start);
-        toBytes((int) l2, dest, start + 4);
+        toBytes(i1, dest, start);
+        toBytes(i2, dest, start + 4);
 
     }
 
