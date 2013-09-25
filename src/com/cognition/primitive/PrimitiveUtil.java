@@ -128,12 +128,12 @@ public final class PrimitiveUtil {
 
         for (int i = 0; i < resultSz; i++) {
             int bytePos = 2 + (i / 8);
-            int bitPos = i & 8;
+            int bitPos = i % 8;
 
             int mask = (1 << (7 - bitPos)) & 0xff;
 
             byte bits = (byte) (mask & array[bytePos]);
-            result[i] = bits > 0 ? true : false;
+            result[i] = bits != 0 ? true : false;
 
         }
 
@@ -179,9 +179,11 @@ public final class PrimitiveUtil {
     public static final short toShort(byte[] array, int start) {
 
         throwIfBadArraySize(array, start, 2);
-        int b1 = array[start] & 0xff;
+        int b1 = (array[start] & 0xff) << 8;
         int b2 = array[start + 1] & 0xff;
-        return (short) ((b1 << 8) + b2);
+        short result = (short) (b1 | b2);
+        return result;
+        // return (short) ((b1 << 8) + b2);
 
     }
 
@@ -195,27 +197,24 @@ public final class PrimitiveUtil {
      */
     public static final int toInt(byte[] array, int start) {
         throwIfBadArraySize(array, start, 4);
-        int b1 = array[start] & 0xff;
-        int b2 = array[start + 1] & 0xff;
-        int b3 = array[start + 2] & 0xff;
+        int b1 = (array[start] & 0xff) << 24;
+        int b2 = (array[start + 1] & 0xff) << 16;
+        int b3 = (array[start + 2] & 0xff) << 8;
         int b4 = array[start + 3] & 0xff;
-        return ((b1 << 24) + (b2 << 16) + (b3 << 8) + b4);
+        int result = b1 | b2 | b3 | b4;
+        return result;
+        // return ((b1 << 24) + (b2 << 16) + (b3 << 8) + b4);
 
     }
 
     public static final long toLong(byte[] array, int start) {
         throwIfBadArraySize(array, start, 8);
-        int b1 = array[start] & 0xff;
-        int b2 = array[start + 1] & 0xff;
-        int b3 = array[start + 2] & 0xff;
-        int b4 = array[start + 3] & 0xff;
-        int b5 = array[start + 4] & 0xff;
-        int b6 = array[start + 5] & 0xff;
-        int b7 = array[start + 6] & 0xff;
-        int b8 = array[start + 7] & 0xff;
 
-        return ((b1 << 56) + (b2 << 48) + (b3 << 40) + (b4 << 32) + (b5 << 24) + (b6 << 16)
-                + (b7 << 8) + b8);
+        long l1 = toInt(array, start);
+        long l2 = toInt(array, start + 4);
+
+        long result = (l1 << 32) | l2;
+        return result;
 
     }
 
@@ -234,9 +233,11 @@ public final class PrimitiveUtil {
     public static final char toChar(byte[] array, int start) {
 
         throwIfBadArraySize(array, start, 2);
-        int b1 = array[start] & 0xff;
+        int b1 = (array[start] & 0xff) << 8;
         int b2 = array[start + 1] & 0xff;
-        return (char) ((b1 << 8) + b2);
+        char result = (char) (b1 | b2);
+        return result;
+        // return (char) ((b1 << 8) + b2);
 
     }
 
@@ -420,11 +421,12 @@ public final class PrimitiveUtil {
             int bitPos = i % 8;
             int mask = (1 << (7 - bitPos)) & 0xff;
 
-            if (!array[i]) {
+            if (array[i]) {
+                result[bytePos] = (byte) (result[bytePos] | mask);
+            } else {
                 mask = ~mask;
+                result[bytePos] = (byte) (result[bytePos] & mask);
             }
-
-            result[bytePos] = (byte) (result[bytePos] & mask);
 
         }
 
@@ -458,15 +460,11 @@ public final class PrimitiveUtil {
     }
 
     public static final void toBytes(long value, byte[] dest, int start) {
+        long l1 = value >> 32;
+        long l2 = (int) value;
 
-        dest[start] = (byte) (value >>> 56);
-        dest[start + 1] = (byte) (value >>> 48);
-        dest[start + 2] = (byte) (value >>> 40);
-        dest[start + 3] = (byte) (value >>> 32);
-        dest[start + 4] = (byte) (value >>> 24);
-        dest[start + 5] = (byte) (value >>> 16);
-        dest[start + 6] = (byte) (value >>> 8);
-        dest[start + 7] = (byte) value;
+        toBytes((int) l1, dest, start);
+        toBytes((int) l2, dest, start + 4);
 
     }
 

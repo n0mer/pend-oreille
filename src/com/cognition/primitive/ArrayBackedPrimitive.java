@@ -45,69 +45,69 @@ public final class ArrayBackedPrimitive {
             throw new IllegalArgumentException(type.getName()
                     + " is not a primitive ");
         }
-        if (type == byte.class) {
+        if (type.isAssignableFrom(byte.class)) {
             return asByte();
         }
 
-        if (type == Byte.TYPE) {
+        if (type.isAssignableFrom(Byte.TYPE)) {
             return asBoxedByte();
         }
 
-        if (type == short.class) {
+        if (type.isAssignableFrom(short.class)) {
             return asShort();
         }
 
-        if (type == Short.class) {
+        if (type.isAssignableFrom(Short.class)) {
             return asBoxedShort();
         }
 
-        if (type == int.class) {
+        if (type.isAssignableFrom(int.class)) {
             return asInt();
         }
 
-        if (type == Integer.class) {
+        if (type.isAssignableFrom(Integer.class)) {
             return asBoxedInt();
 
         }
 
-        if (type == long.class) {
+        if (type.isAssignableFrom(long.class)) {
             return asLong();
 
         }
 
-        if (type == Long.class) {
+        if (type.isAssignableFrom(Long.class)) {
             return asBoxedLong();
         }
 
-        if (type == float.class) {
+        if (type.isAssignableFrom(float.class)) {
             return asFloat();
         }
 
-        if (type == Float.class) {
+        if (type.isAssignableFrom(Float.class)) {
             return asBoxedFloat();
         }
 
-        if (type == double.class) {
+        if (type.isAssignableFrom(double.class)) {
             return asDouble();
         }
 
-        if (type == Double.class) {
+        if (type.isAssignableFrom(Double.class)) {
             return asBoxedDouble();
         }
 
-        if (type == boolean.class) {
+        if (type.isAssignableFrom(boolean.class)) {
             return asBoolean();
         }
 
-        if (type == Boolean.class) {
+        if (type.isAssignableFrom(Boolean.class)) {
             return asBoxedBoolean();
         }
 
-        if (type == char.class) {
+        if (type.isAssignableFrom(char.class)) {
             return asChar();
         }
 
-        if (type == Character.class) {
+        if (type.isAssignableFrom(Character.class)) {
             return asBoxedChar();
         }
 
