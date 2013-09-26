@@ -10,6 +10,12 @@ import java.util.Map;
 import junit.framework.TestCase;
 import android.reflect.util.FieldReflectionUtil;
 
+/**
+ * Test {@link FieldReflectionUtil}.
+ * 
+ * @author Richard Schilling
+ * @since 1.0
+ */
 public class FieldReflectionUtilTest extends TestCase {
 
     private List<Field> fields;
@@ -33,6 +39,12 @@ public class FieldReflectionUtilTest extends TestCase {
         }
     }
 
+    /**
+     * Make sure that all primitives (and only primitives) are removed by
+     * {@link FieldReflectionUtil#removePrimitives(Map)}.
+     * 
+     * @since 1.0
+     */
     public void testRemovePrimitives() {
 
         Map<Field, Object> pretendValues = new HashMap<Field, Object>();
