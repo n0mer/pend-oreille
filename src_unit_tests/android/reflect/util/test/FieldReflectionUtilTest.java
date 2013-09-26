@@ -53,7 +53,7 @@ public class FieldReflectionUtilTest extends TestCase {
 
         }
 
-        Map<Field, Object> result = FieldReflectionUtil.removePrimitives(pretendValues);
+        Map<Field, Object> result = FieldReflectionUtil.removePrimitivesAndArrays(pretendValues);
         assertTrue("result does not have the correct number of fields in it. found "
                 + result.size() + ", expected " + nonPrimitives.size(),
                 result.size() == nonPrimitives.size());

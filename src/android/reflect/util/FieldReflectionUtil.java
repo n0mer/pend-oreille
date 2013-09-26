@@ -49,7 +49,7 @@ public final class FieldReflectionUtil {
      * @return a new map
      * @since 1.0
      */
-    public static Map<Field, Object> removePrimitives(Map<Field, Object> fieldMap) {
+    public static Map<Field, Object> removePrimitivesAndArrays(Map<Field, Object> fieldMap) {
 
         if (fieldMap == null) {
             return null;
