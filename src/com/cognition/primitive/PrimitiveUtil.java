@@ -20,7 +20,7 @@
 package com.cognition.primitive;
 
 /**
- * Contains functions required by {@link ArrayBackedPrimitive}.
+ * Contains functions required by {@link PrimitiveHelper}.
  * 
  * @author Richard Schilling
  * @since 1.0

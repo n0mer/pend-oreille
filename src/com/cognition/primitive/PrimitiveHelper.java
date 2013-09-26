@@ -97,7 +97,7 @@ package com.cognition.primitive;
  * @since 1.0
  * @param <T> the type of primitive this object was created for
  */
-public final class ArrayBackedPrimitive {
+public final class PrimitiveHelper {
 
     /**
      * The array that contains this primitive's data.
@@ -113,7 +113,7 @@ public final class ArrayBackedPrimitive {
      * @param value the object's initial value.
      * @since 1.0
      */
-    public ArrayBackedPrimitive(byte value) {
+    public PrimitiveHelper(byte value) {
         mArray = new byte[1];
         set(value);
     }
@@ -125,7 +125,7 @@ public final class ArrayBackedPrimitive {
      * @param value the object's initial value.
      * @since 1.0
      */
-    public ArrayBackedPrimitive(short value) {
+    public PrimitiveHelper(short value) {
         mArray = new byte[2];
         set(value);
     }
@@ -137,7 +137,7 @@ public final class ArrayBackedPrimitive {
      * @param value the object's initial value.
      * @since 1.0
      */
-    public ArrayBackedPrimitive(int value) {
+    public PrimitiveHelper(int value) {
         mArray = new byte[4];
         set(value);
     }
@@ -149,7 +149,7 @@ public final class ArrayBackedPrimitive {
      * @param value the object's initial value.
      * @since 1.0
      */
-    public ArrayBackedPrimitive(long value) {
+    public PrimitiveHelper(long value) {
         mArray = new byte[8];
         set(value);
     }
@@ -161,7 +161,7 @@ public final class ArrayBackedPrimitive {
      * @param value the object's initial value.
      * @since 1.0
      */
-    public ArrayBackedPrimitive(float value) {
+    public PrimitiveHelper(float value) {
         mArray = new byte[4];
         set(value);
     }
@@ -173,7 +173,7 @@ public final class ArrayBackedPrimitive {
      * @param value the object's initial value.
      * @since 1.0
      */
-    public ArrayBackedPrimitive(double value) {
+    public PrimitiveHelper(double value) {
         mArray = new byte[8];
         set(value);
     }
@@ -185,7 +185,7 @@ public final class ArrayBackedPrimitive {
      * @param value the object's initial value.
      * @since 1.0
      */
-    public ArrayBackedPrimitive(boolean value) {
+    public PrimitiveHelper(boolean value) {
         mArray = new byte[1];
         set(value);
     }
@@ -197,7 +197,7 @@ public final class ArrayBackedPrimitive {
      * @param value the object's initial value.
      * @since 1.0
      */
-    public ArrayBackedPrimitive(char value) {
+    public PrimitiveHelper(char value) {
         mArray = new byte[2];
         set(value);
     }
@@ -209,7 +209,7 @@ public final class ArrayBackedPrimitive {
      * @param value the object's initial value.
      * @since 1.0
      */
-    public ArrayBackedPrimitive(byte[] value) {
+    public PrimitiveHelper(byte[] value) {
         mArray = value;
     }
 
@@ -220,7 +220,7 @@ public final class ArrayBackedPrimitive {
      * @param value the object's initial value.
      * @since 1.0
      */
-    public ArrayBackedPrimitive(short[] value) {
+    public PrimitiveHelper(short[] value) {
         mArray = new byte[2];
         set(value);
     }
@@ -232,7 +232,7 @@ public final class ArrayBackedPrimitive {
      * @param value the object's initial value.
      * @since 1.0
      */
-    public ArrayBackedPrimitive(int[] value) {
+    public PrimitiveHelper(int[] value) {
         mArray = new byte[4];
         set(value);
     }
@@ -244,7 +244,7 @@ public final class ArrayBackedPrimitive {
      * @param value the object's initial value.
      * @since 1.0
      */
-    public ArrayBackedPrimitive(long[] value) {
+    public PrimitiveHelper(long[] value) {
         mArray = new byte[8];
         set(value);
     }
@@ -256,7 +256,7 @@ public final class ArrayBackedPrimitive {
      * @param value the object's initial value.
      * @since 1.0
      */
-    public ArrayBackedPrimitive(float[] value) {
+    public PrimitiveHelper(float[] value) {
         mArray = new byte[4];
         set(value);
     }
@@ -268,7 +268,7 @@ public final class ArrayBackedPrimitive {
      * @param value the object's initial value.
      * @since 1.0
      */
-    public ArrayBackedPrimitive(double[] value) {
+    public PrimitiveHelper(double[] value) {
         mArray = new byte[8];
         set(value);
     }
@@ -280,7 +280,7 @@ public final class ArrayBackedPrimitive {
      * @param value the object's initial value.
      * @since 1.0
      */
-    public ArrayBackedPrimitive(boolean[] value) {
+    public PrimitiveHelper(boolean[] value) {
         mArray = new byte[1];
         set(value);
     }
@@ -292,7 +292,7 @@ public final class ArrayBackedPrimitive {
      * @param value the object's initial value.
      * @since 1.0
      */
-    public ArrayBackedPrimitive(char[] value) {
+    public PrimitiveHelper(char[] value) {
         mArray = new byte[2];
         set(value);
     }
