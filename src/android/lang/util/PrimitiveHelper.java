@@ -17,7 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-package com.cognition.primitive;
+package android.lang.util;
 
 /**
  * {@code ArrayBackedPrimitive} allows primitive and arrays of primitives to be
@@ -476,8 +476,8 @@ public final class PrimitiveHelper {
      * 
      * @param value type of value to return
      * @since 1.0
-     * @throws RuntimeException if the underlying byte array cannot be
-     *             converted to the specified {@code type}.
+     * @throws RuntimeException if the underlying byte array cannot be converted
+     *             to the specified {@code type}.
      */
     public Object asType(Class<?> type) {
         return type.isPrimitive() ? asPrimitiveType(type) : asPrimitiveArray(type);
@@ -562,7 +562,7 @@ public final class PrimitiveHelper {
                     + " is not a primitive array ");
         }
         if (type == byte[].class) {
-            throw new UnsupportedOperationException("use ArrayBackedPrimitive.array instead.");
+            return mArray;
         }
 
         if (type == Byte[].class) {

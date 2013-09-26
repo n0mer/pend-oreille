@@ -17,7 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-package com.cognition.primitive;
+package android.lang.util;
 
 /**
  * Contains functions required by {@link PrimitiveHelper}.
