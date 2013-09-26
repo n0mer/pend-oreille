@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2013  Richard Schilling. All rights reserved.
+ * contact: coderroadie@gmail.com
+ * 
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 
 package android.reflect.util;
 
@@ -7,11 +25,17 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
- * Reflection utilities for class operations.
+ * {@link Class} reflection utility functions.
  * 
  * @author Richard Schilling
+ * @since 1.0
  */
 public final class ClassReflectionUtil {
+    /**
+     * A list of classes for primitive box types.
+     * 
+     * @since 1.0
+     */
     public static final Class<?>[] PRIMITIVE_BOX_TYPES = {
             Byte.class,
             Short.class,
@@ -25,7 +49,9 @@ public final class ClassReflectionUtil {
     };
 
     /**
-     * These classes are persisted as binary objects
+     * A list of classes for primitive arrays.
+     * 
+     * @since 1.0
      */
     public static final Class<?>[] PRIMITIVE_ARRAYS = {
             byte[].class, Byte[].class,
@@ -43,13 +69,14 @@ public final class ClassReflectionUtil {
     }
 
     /**
-     * Returns true if calling {@link Class#isPrimitive()} on {@code c} return
+     * Returns true if calling {@link Class#isPrimitive()} on {@code c} returns
      * true or if {@code c} is present in {@link #PRIMITIVE_ARRAYS}.
      * 
      * @param c the class to check
      * @return true if the class is a primitive type or a primitive box type.
+     * @since 1.0
      */
-    public static boolean isPrimitive(Class<?> c) {
+    public static boolean isPrimitiveOrArray(Class<?> c) {
 
         if (c == null) {
             throw new IllegalArgumentException("c cannot be null");
@@ -63,12 +90,19 @@ public final class ClassReflectionUtil {
 
     }
 
+    /**
+     * Returns true if {@code c} is present in {@link #PRIMITIVE_ARRAYS}.
+     * 
+     * @param c the class to check for.
+     * @return true if class is a primitive array
+     * @since 1.0
+     */
     public static boolean isPrimitiveArray(Class<?> c) {
         if (c == null) {
             throw new IllegalArgumentException("c cannot be null");
         }
 
-        for (Class<?> pClass : PRIMITIVE_BOX_TYPES) {
+        for (Class<?> pClass : PRIMITIVE_ARRAYS) {
             if (pClass == c)
                 return true;
         }
@@ -79,17 +113,18 @@ public final class ClassReflectionUtil {
 
     /**
      * Creates a new set that contains only classes that return false when
-     * calling {@link #isPrimitive(Field)}.
+     * calling {@link #isPrimitiveOrArray(Field)}.
      * 
      * @param classSet the set of classes to process
-     * @return a new set containing
+     * @return a new set containing non-primitive types
+     * @since 1.0
      */
     public static Set<Class<?>> removePrimitives(Set<Class<?>> classSet) {
         Set<Class<?>> result = new HashSet<Class<?>>();
 
         for (Iterator<Class<?>> i = classSet.iterator(); i.hasNext();) {
             Class<?> c = i.next();
-            if (!isPrimitive(c))
+            if (!isPrimitiveOrArray(c))
                 result.add(c);
         }
 
@@ -99,17 +134,18 @@ public final class ClassReflectionUtil {
 
     /**
      * Creates a new set that contains only classes that return true when
-     * calling {@link #isPrimitive(Field)}.
+     * calling {@link #isPrimitiveOrArray(Field)}.
      * 
      * @param classSet the set of classes to process
-     * @return a new set containing
+     * @return a new set containing non-primitive types
+     * @since 1.0
      */
     public static Set<Class<?>> keepPrimitives(Set<Class<?>> classSet) {
         Set<Class<?>> result = new HashSet<Class<?>>();
 
         for (Iterator<Class<?>> i = classSet.iterator(); i.hasNext();) {
             Class<?> c = i.next();
-            if (isPrimitive(c))
+            if (isPrimitiveOrArray(c))
                 result.add(c);
         }
 

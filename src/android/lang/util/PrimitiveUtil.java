@@ -40,6 +40,7 @@ public final class PrimitiveUtil {
      * @param mod the number to use in the modulus calculation
      * @throws IllegalArgumentException if {@code array.length % div != 0}; if
      *             div <= 0; or if array == null.
+     * @since 1.0
      */
     private static final void throwIfBadArray(byte[] array, int div) {
 
@@ -62,6 +63,7 @@ public final class PrimitiveUtil {
      * 
      * @param array the array to convert
      * @return an array of short values.
+     * @since 1.0
      */
     /* default */static final short[] toShortArray(byte[] array) {
 
@@ -83,6 +85,7 @@ public final class PrimitiveUtil {
      * 
      * @param array the array to convert.
      * @return an array of integers.
+     * @since 1.0
      */
     /* default */static final int[] toIntArray(byte[] array) {
         throwIfBadArray(array, 4);
@@ -101,6 +104,7 @@ public final class PrimitiveUtil {
      * 
      * @param array the array to convert.
      * @return an array of integers.
+     * @since 1.0
      */
     /* default */static final long[] toLongArray(byte[] array) {
         throwIfBadArray(array, 8);
