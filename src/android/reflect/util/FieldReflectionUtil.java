@@ -20,9 +20,10 @@
 package android.reflect.util;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -172,18 +173,25 @@ public final class FieldReflectionUtil {
      * @return all the fields defined in a class and it's super classes.
      * @since 1.0
      */
-    public static List<Field> getAllFields(Class<?> c) {
+    public static List<Field> getAllFields(Class<?> c, int exceptModifiers) {
 
-        List<Field> result = new LinkedList<Field>();
+        List<Field> result = new ArrayList<Field>();
         for (Class<?> classWalk = c; classWalk != null; classWalk = classWalk
                 .getSuperclass()) {
             for (Field field : classWalk.getDeclaredFields()) {
+                if ((field.getModifiers() & exceptModifiers) != 0) {
+                    continue;
+                }
                 result.add(field);
             }
         }
 
         return result;
 
+    }
+
+    public static List<Field> getAllFields(Class<?> c) {
+        return getAllFields(c, Modifier.FINAL | Modifier.TRANSIENT);
     }
 
     /**

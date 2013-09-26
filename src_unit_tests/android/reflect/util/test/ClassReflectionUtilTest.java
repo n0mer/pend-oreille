@@ -101,27 +101,51 @@ public class ClassReflectionUtilTest extends TestCase {
          * create a mixed set of classes
          */
         Set<Class<?>> testSet = new HashSet<Class<?>>(5);
+        Set<Class<?>> controlSet = new HashSet<Class<?>>(5);
 
         for (int i = 0; i < 2; i++) {
             testSet.add(NONPRIMITIVE_CLASSES[i]);
+            controlSet.add(NONPRIMITIVE_CLASSES[i]);
         }
 
         for (Class<?> c : PRIMITIVE_ARRAY_CLASSES) {
             testSet.add(c);
+            controlSet.add(c);
 
         }
         testSet.add(NONPRIMITIVE_CLASSES[2]);
+        controlSet.add(NONPRIMITIVE_CLASSES[2]);
 
         for (Class<?> c : PRIMITIVE_CLASSES) {
             testSet.add(c);
+            controlSet.add(c);
         }
 
         for (int i = 3; i < NONPRIMITIVE_CLASSES.length; i++) {
             testSet.add(NONPRIMITIVE_CLASSES[i]);
+            controlSet.add(NONPRIMITIVE_CLASSES[i]);
         }
 
         Set<Class<?>> inclusive = ClassReflectionUtil.keepPrimitives(testSet);
+
+        /*
+         * make sure testSet is untouched
+         */
+
+        for (Class<?> c : controlSet) {
+            assertTrue("ClassReflectionUtil removed class " + c.getName() + " from testSet",
+                    testSet.contains(c));
+        }
+
         Set<Class<?>> exclusive = ClassReflectionUtil.removePrimitives(testSet);
+        /*
+         * make sure testSet is untouched
+         */
+
+        for (Class<?> c : controlSet) {
+            assertTrue("ClassReflectionUtil removed class " + c.getName() + " from testSet",
+                    testSet.contains(c));
+        }
 
         /*
          * check inclusive
