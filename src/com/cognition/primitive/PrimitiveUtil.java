@@ -25,7 +25,7 @@ package com.cognition.primitive;
  * @author Richard Schilling
  * @since 1.0
  */
-/* default */final class PrimitiveUtil {
+public final class PrimitiveUtil {
 
     private PrimitiveUtil() {
         throw new UnsupportedOperationException("instantiating not allowed.");
@@ -508,7 +508,7 @@ package com.cognition.primitive;
 
     }
 
-    /* default */static Byte[] box(byte[] array) {
+    public static Byte[] box(byte[] array) {
         Byte[] result = new Byte[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = Byte.valueOf(array[i]);
@@ -516,7 +516,7 @@ package com.cognition.primitive;
         return result;
     }
 
-    /* default */static final Short[] box(short[] array) {
+    public static final Short[] box(short[] array) {
         Short[] result = new Short[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = (Short.valueOf(array[i]));
@@ -524,7 +524,7 @@ package com.cognition.primitive;
         return result;
     }
 
-    /* default */static final Integer[] box(int[] array) {
+    public static final Integer[] box(int[] array) {
         Integer[] result = new Integer[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = (Integer.valueOf(array[i]));
@@ -532,7 +532,7 @@ package com.cognition.primitive;
         return result;
     }
 
-    /* default */static final Long[] box(long[] array) {
+    public static final Long[] box(long[] array) {
         Long[] result = new Long[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = (Long.valueOf(array[i]));
@@ -540,7 +540,7 @@ package com.cognition.primitive;
         return result;
     }
 
-    /* default */static final Float[] box(float[] array) {
+    public static final Float[] box(float[] array) {
         Float[] result = new Float[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = (Float.valueOf(array[i]));
@@ -548,7 +548,7 @@ package com.cognition.primitive;
         return result;
     }
 
-    /* default */static final Double[] box(double[] array) {
+    public static final Double[] box(double[] array) {
         Double[] result = new Double[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = (Double.valueOf(array[i]));
@@ -556,7 +556,7 @@ package com.cognition.primitive;
         return result;
     }
 
-    /* default */static final Boolean[] box(boolean[] array) {
+    public static final Boolean[] box(boolean[] array) {
         Boolean[] result = new Boolean[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = (Boolean.valueOf(array[i]));
@@ -564,7 +564,7 @@ package com.cognition.primitive;
         return result;
     }
 
-    /* default */static final Character[] box(char[] array) {
+    public static final Character[] box(char[] array) {
         Character[] result = new Character[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = (Character.valueOf(array[i]));
@@ -572,7 +572,7 @@ package com.cognition.primitive;
         return result;
     }
 
-    /* default */static byte[] unbox(Byte[] array) {
+    public static byte[] unbox(Byte[] array) {
         byte[] result = new byte[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = array[i] == null ? 0 : array[i].byteValue();
@@ -580,7 +580,7 @@ package com.cognition.primitive;
         return result;
     }
 
-    /* default */static short[] unbox(Short[] array) {
+    public static short[] unbox(Short[] array) {
         short[] result = new short[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = array[i] == null ? 0 : array[i].shortValue();
@@ -589,7 +589,7 @@ package com.cognition.primitive;
         return result;
     }
 
-    /* default */static int[] unbox(Integer[] array) {
+    public static int[] unbox(Integer[] array) {
         int[] result = new int[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = array[i] == null ? 0 : array[i].intValue();
@@ -598,7 +598,7 @@ package com.cognition.primitive;
         return result;
     }
 
-    /* default */static long[] unbox(Long[] array) {
+    public static long[] unbox(Long[] array) {
         long[] result = new long[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = array[i] == null ? 0 : array[i].longValue();
@@ -607,7 +607,7 @@ package com.cognition.primitive;
         return result;
     }
 
-    /* default */static float[] unbox(Float[] array) {
+    public static float[] unbox(Float[] array) {
         float[] result = new float[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = array[i] == null ? 0.0f : array[i].floatValue();
@@ -616,7 +616,7 @@ package com.cognition.primitive;
         return result;
     }
 
-    /* default */static double[] unbox(Double[] array) {
+    public static double[] unbox(Double[] array) {
         double[] result = new double[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = array[i] == null ? 0.0d : array[i].doubleValue();
@@ -625,7 +625,7 @@ package com.cognition.primitive;
         return result;
     }
 
-    /* default */static boolean[] unbox(Boolean[] array) {
+    public static boolean[] unbox(Boolean[] array) {
         boolean[] result = new boolean[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = array[i] == null ? false : array[i].booleanValue();
@@ -634,7 +634,7 @@ package com.cognition.primitive;
         return result;
     }
 
-    /* default */static char[] unbox(Character[] array) {
+    public static char[] unbox(Character[] array) {
         char[] result = new char[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = array[i] == null ? '\u0000' : array[i].charValue();
