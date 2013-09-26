@@ -1,9 +1,31 @@
+/*
+ * Copyright (C) 2013  Richard Schilling. All rights reserved.
+ * contact: coderroadie@gmail.com
+ * 
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 
 package com.cognition.primitive;
 
-import com.cognition.reflect.ClassReflectionUtil;
-
-public final class PrimitiveUtil {
+/**
+ * Contains functions required by {@link ArrayBackedPrimitive}.
+ * 
+ * @author Richard Schilling
+ * @since 1.0
+ */
+/* default */final class PrimitiveUtil {
 
     private PrimitiveUtil() {
         throw new UnsupportedOperationException("instantiating not allowed.");
@@ -41,7 +63,7 @@ public final class PrimitiveUtil {
      * @param array the array to convert
      * @return an array of short values.
      */
-    public static final short[] toShortArray(byte[] array) {
+    /* default */static final short[] toShortArray(byte[] array) {
 
         throwIfBadArray(array, 2);
 
@@ -62,7 +84,7 @@ public final class PrimitiveUtil {
      * @param array the array to convert.
      * @return an array of integers.
      */
-    public static final int[] toIntArray(byte[] array) {
+    /* default */static final int[] toIntArray(byte[] array) {
         throwIfBadArray(array, 4);
         int[] result = new int[array.length / 4];
         for (int i = 0; i < array.length; i += 4) {
@@ -80,7 +102,7 @@ public final class PrimitiveUtil {
      * @param array the array to convert.
      * @return an array of integers.
      */
-    public static final long[] toLongArray(byte[] array) {
+    /* default */static final long[] toLongArray(byte[] array) {
         throwIfBadArray(array, 8);
         long[] result = new long[array.length / 8];
         for (int i = 0; i < array.length; i += 8) {
@@ -91,7 +113,7 @@ public final class PrimitiveUtil {
 
     }
 
-    public static final float[] toFloatArray(byte[] array) {
+    /* default */static final float[] toFloatArray(byte[] array) {
         throwIfBadArray(array, 4);
         float[] result = new float[array.length / 4];
         for (int i = 0; i < array.length; i += 4) {
@@ -102,7 +124,7 @@ public final class PrimitiveUtil {
 
     }
 
-    public static final double[] toDoubleArray(byte[] array) {
+    /* default */static final double[] toDoubleArray(byte[] array) {
         throwIfBadArray(array, 8);
         double[] result = new double[array.length / 8];
         for (int i = 0; i < array.length; i += 8) {
@@ -121,7 +143,7 @@ public final class PrimitiveUtil {
      * @param start the byte position to start in.
      * @return an array of boolean values extracted from the bit field.
      */
-    public static final boolean[] toBooleanArray(byte[] array) {
+    /* default */static final boolean[] toBooleanArray(byte[] array) {
 
         short resultSz = toShort(array, 0);
         boolean[] result = new boolean[resultSz];
@@ -141,7 +163,7 @@ public final class PrimitiveUtil {
 
     }
 
-    public static final char[] toCharArray(byte[] array) {
+    /* default */static final char[] toCharArray(byte[] array) {
 
         throwIfBadArray(array, 2);
 
@@ -176,7 +198,7 @@ public final class PrimitiveUtil {
         }
     }
 
-    public static final short toShort(byte[] array, int start) {
+    /* default */static final short toShort(byte[] array, int start) {
 
         throwIfBadArraySize(array, start, 2);
         short s1 = (short) (array[start] & 0xff);
@@ -194,7 +216,7 @@ public final class PrimitiveUtil {
      * @param start the position in array to start at.
      * @return an integer built out of the next four bytes of the array.
      */
-    public static final int toInt(byte[] array, int start) {
+    /* default */static final int toInt(byte[] array, int start) {
         throwIfBadArraySize(array, start, 4);
 
         int i1 = toShort(array, start);
@@ -204,7 +226,7 @@ public final class PrimitiveUtil {
 
     }
 
-    public static final long toLong(byte[] array, int start) {
+    /* default */static final long toLong(byte[] array, int start) {
         throwIfBadArraySize(array, start, 8);
 
         long l1 = toInt(array, start);
@@ -214,19 +236,19 @@ public final class PrimitiveUtil {
 
     }
 
-    public static final float toFloat(byte[] array, int start) {
+    /* default */static final float toFloat(byte[] array, int start) {
 
         return Float.intBitsToFloat(toInt(array, start));
 
     }
 
-    public static final double toDouble(byte[] array, int start) {
+    /* default */static final double toDouble(byte[] array, int start) {
 
         return Double.longBitsToDouble(toLong(array, start));
 
     }
 
-    public static final char toChar(byte[] array, int start) {
+    /* default */static final char toChar(byte[] array, int start) {
 
         throwIfBadArraySize(array, start, 2);
         int b1 = (array[start] & 0xff) << 8;
@@ -235,7 +257,7 @@ public final class PrimitiveUtil {
 
     }
 
-    public static final byte[] toBytes(Short[] array) {
+    /* default */static final byte[] toBytes(Short[] array) {
 
         byte[] result = new byte[array.length * 2];
         for (int i = 0; i < array.length; i++) {
@@ -245,7 +267,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static final byte[] toBytes(Integer[] array) {
+    /* default */static final byte[] toBytes(Integer[] array) {
 
         byte[] result = new byte[array.length * 4];
         for (int i = 0; i < array.length; i++) {
@@ -255,7 +277,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static final byte[] toBytes(Long[] array) {
+    /* default */static final byte[] toBytes(Long[] array) {
 
         byte[] result = new byte[array.length * 8];
         for (int i = 0; i < array.length; i++) {
@@ -265,7 +287,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static final byte[] toBytes(Float[] array) {
+    /* default */static final byte[] toBytes(Float[] array) {
 
         byte[] result = new byte[array.length * 4];
         for (int i = 0; i < array.length; i++) {
@@ -275,7 +297,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static final byte[] toBytes(Double[] array) {
+    /* default */static final byte[] toBytes(Double[] array) {
 
         byte[] result = new byte[array.length * 8];
         for (int i = 0; i < array.length; i++) {
@@ -287,7 +309,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static final byte[] toBytes(Boolean[] array) {
+    /* default */static final byte[] toBytes(Boolean[] array) {
 
         if (array == null) {
             return null;
@@ -302,7 +324,7 @@ public final class PrimitiveUtil {
 
     }
 
-    public static final byte[] toBytes(Character[] array) {
+    /* default */static final byte[] toBytes(Character[] array) {
 
         if (array == null) {
             return null;
@@ -317,7 +339,7 @@ public final class PrimitiveUtil {
 
     }
 
-    public static final byte[] toBytes(short[] array) {
+    /* default */static final byte[] toBytes(short[] array) {
 
         byte[] result = new byte[array.length * 2];
         for (int i = 0; i < array.length; i++) {
@@ -327,7 +349,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static final byte[] toBytes(int[] array) {
+    /* default */static final byte[] toBytes(int[] array) {
 
         byte[] result = new byte[array.length * 4];
         for (int i = 0; i < array.length; i++) {
@@ -338,7 +360,7 @@ public final class PrimitiveUtil {
 
     }
 
-    public static final byte[] toBytes(long[] array) {
+    /* default */static final byte[] toBytes(long[] array) {
 
         byte[] result = new byte[array.length * 8];
         for (int i = 0; i < array.length; i++) {
@@ -349,7 +371,7 @@ public final class PrimitiveUtil {
 
     }
 
-    public static final byte[] toBytes(float[] array) {
+    /* default */static final byte[] toBytes(float[] array) {
 
         byte[] result = new byte[array.length * 4];
         for (int i = 0; i < array.length; i++) {
@@ -360,7 +382,7 @@ public final class PrimitiveUtil {
 
     }
 
-    public static final byte[] toBytes(double[] array) {
+    /* default */static final byte[] toBytes(double[] array) {
 
         byte[] result = new byte[array.length * 8];
         for (int i = 0; i < array.length; i++) {
@@ -386,7 +408,7 @@ public final class PrimitiveUtil {
      * @param array the array to convert
      * @return a byte array
      */
-    public static final byte[] toBytes(boolean[] array) {
+    /* default */static final byte[] toBytes(boolean[] array) {
         if (array == null) {
             return null;
         }
@@ -427,7 +449,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static final byte[] toBytes(char[] array) {
+    /* default */static final byte[] toBytes(char[] array) {
 
         byte[] result = new byte[array.length * 2];
         for (int i = 0; i < array.length; i++) {
@@ -437,14 +459,14 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static final void toBytes(short value, byte[] dest, int start) {
+    /* default */static final void toBytes(short value, byte[] dest, int start) {
 
         dest[start] = (byte) (value >>> 8);
         dest[start + 1] = (byte) (value);
 
     }
 
-    public static final void toBytes(int value, byte[] dest, int start) {
+    /* default */static final void toBytes(int value, byte[] dest, int start) {
 
         short s1 = (short) (value >>> 16);
         short s2 = (short) value;
@@ -454,7 +476,7 @@ public final class PrimitiveUtil {
 
     }
 
-    public static final void toBytes(long value, byte[] dest, int start) {
+    /* default */static final void toBytes(long value, byte[] dest, int start) {
         int i1 = (int) (value >>> 32);
         int i2 = (int) value;
 
@@ -463,26 +485,30 @@ public final class PrimitiveUtil {
 
     }
 
-    public static final void toBytes(float value, byte[] dest, int start) {
+    /* default */static final void toBytes(float value, byte[] dest, int start) {
 
         toBytes(Float.floatToIntBits(value), dest, start);
 
     }
 
-    public static final void toBytes(double value, byte[] dest, int start) {
+    /* default */static final void toBytes(double value, byte[] dest, int start) {
 
         toBytes(Double.doubleToLongBits(value), dest, start);
 
     }
 
-    public static final void toBytes(char value, byte[] dest, int start) {
+    /* default */static final void toBytes(boolean value, byte[] dest, int start) {
+        dest[start] = value ? (byte) 1 : (byte) 0;
+    }
+
+    /* default */static final void toBytes(char value, byte[] dest, int start) {
 
         dest[start] = (byte) (value >>> 8);
         dest[start + 1] = (byte) (value);
 
     }
 
-    public static Byte[] box(byte[] array) {
+    /* default */static Byte[] box(byte[] array) {
         Byte[] result = new Byte[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = Byte.valueOf(array[i]);
@@ -490,7 +516,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static final Short[] box(short[] array) {
+    /* default */static final Short[] box(short[] array) {
         Short[] result = new Short[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = (Short.valueOf(array[i]));
@@ -498,7 +524,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static final Integer[] box(int[] array) {
+    /* default */static final Integer[] box(int[] array) {
         Integer[] result = new Integer[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = (Integer.valueOf(array[i]));
@@ -506,7 +532,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static final Long[] box(long[] array) {
+    /* default */static final Long[] box(long[] array) {
         Long[] result = new Long[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = (Long.valueOf(array[i]));
@@ -514,7 +540,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static final Float[] box(float[] array) {
+    /* default */static final Float[] box(float[] array) {
         Float[] result = new Float[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = (Float.valueOf(array[i]));
@@ -522,7 +548,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static final Double[] box(double[] array) {
+    /* default */static final Double[] box(double[] array) {
         Double[] result = new Double[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = (Double.valueOf(array[i]));
@@ -530,7 +556,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static final Boolean[] box(boolean[] array) {
+    /* default */static final Boolean[] box(boolean[] array) {
         Boolean[] result = new Boolean[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = (Boolean.valueOf(array[i]));
@@ -538,7 +564,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static final Character[] box(char[] array) {
+    /* default */static final Character[] box(char[] array) {
         Character[] result = new Character[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = (Character.valueOf(array[i]));
@@ -546,7 +572,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static byte[] unbox(Byte[] array) {
+    /* default */static byte[] unbox(Byte[] array) {
         byte[] result = new byte[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = array[i] == null ? 0 : array[i].byteValue();
@@ -554,7 +580,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static short[] unbox(Short[] array) {
+    /* default */static short[] unbox(Short[] array) {
         short[] result = new short[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = array[i] == null ? 0 : array[i].shortValue();
@@ -563,7 +589,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static int[] unbox(Integer[] array) {
+    /* default */static int[] unbox(Integer[] array) {
         int[] result = new int[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = array[i] == null ? 0 : array[i].intValue();
@@ -572,7 +598,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static long[] unbox(Long[] array) {
+    /* default */static long[] unbox(Long[] array) {
         long[] result = new long[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = array[i] == null ? 0 : array[i].longValue();
@@ -581,7 +607,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static float[] unbox(Float[] array) {
+    /* default */static float[] unbox(Float[] array) {
         float[] result = new float[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = array[i] == null ? 0.0f : array[i].floatValue();
@@ -590,7 +616,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static double[] unbox(Double[] array) {
+    /* default */static double[] unbox(Double[] array) {
         double[] result = new double[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = array[i] == null ? 0.0d : array[i].doubleValue();
@@ -599,7 +625,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static boolean[] unbox(Boolean[] array) {
+    /* default */static boolean[] unbox(Boolean[] array) {
         boolean[] result = new boolean[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = array[i] == null ? false : array[i].booleanValue();
@@ -608,7 +634,7 @@ public final class PrimitiveUtil {
         return result;
     }
 
-    public static char[] unbox(Character[] array) {
+    /* default */static char[] unbox(Character[] array) {
         char[] result = new char[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = array[i] == null ? '\u0000' : array[i].charValue();

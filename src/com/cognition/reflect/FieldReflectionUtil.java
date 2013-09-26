@@ -4,7 +4,6 @@ package com.cognition.reflect;
 import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
