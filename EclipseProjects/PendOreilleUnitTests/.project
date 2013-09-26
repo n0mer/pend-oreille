@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>PendOreilleUnitTest</name>
+	<name>PendOreilleUnitTests</name>
 	<comment></comment>
 	<projects>
-		<project>PendOreille</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -31,4 +30,26 @@
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>SRC_PEND_OREILLE</name>
+			<type>2</type>
+			<locationURI>SRC_PEND_OREILLE</locationURI>
+		</link>
+		<link>
+			<name>SRC_PEND_OREILLE_UNIT_TESTS</name>
+			<type>2</type>
+			<locationURI>SRC_PEND_OREILLE_UNIT_TESTS</locationURI>
+		</link>
+	</linkedResources>
+	<variableList>
+		<variable>
+			<name>SRC_PEND_OREILLE</name>
+			<value>$%7BPARENT-2-PROJECT_LOC%7D/src</value>
+		</variable>
+		<variable>
+			<name>SRC_PEND_OREILLE_UNIT_TESTS</name>
+			<value>$%7BPARENT-2-PROJECT_LOC%7D/src_unit_tests</value>
+		</variable>
+	</variableList>
 </projectDescription>

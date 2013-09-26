@@ -86,6 +86,12 @@ public final class ClassReflectionUtil {
             return true;
         }
 
+        for (Class<?> boxType : PRIMITIVE_BOX_TYPES) {
+            if (c == boxType) {
+                return true;
+            }
+        }
+
         return isPrimitiveArray(c);
 
     }
@@ -103,8 +109,9 @@ public final class ClassReflectionUtil {
         }
 
         for (Class<?> pClass : PRIMITIVE_ARRAYS) {
-            if (pClass == c)
+            if (pClass == c) {
                 return true;
+            }
         }
 
         return false;

@@ -201,8 +201,9 @@ public final class FieldReflectionUtil {
     public static Set<Class<?>> getFieldClasses(
             Class<?> c) {
 
-        if (c == null)
+        if (c == null) {
             throw new IllegalArgumentException("c cannot be null");
+        }
 
         Set<Class<?>> result = new HashSet<Class<?>>();
 
