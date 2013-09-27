@@ -9,6 +9,7 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 import android.reflect.util.FieldReflectionUtil;
+import android.reflect.util.test.model.EnumTestClass;
 import android.reflect.util.test.model.TestClass;
 
 /**
@@ -97,7 +98,7 @@ public class FieldReflectionUtilTest extends TestCase {
     }
 
     public void testRemoveFieldTypes() {
-        
+
         boolean success = false;
         try {
             FieldReflectionUtil.removeFieldTypes(null, new ArrayList<Class<?>>());
@@ -157,6 +158,108 @@ public class FieldReflectionUtilTest extends TestCase {
             assertTrue("removeFieldTypes removed " + npField.getType().getName()
                     + " and it should not have.",
                     found);
+
+        }
+
+    }
+
+    public void testToEnum() {
+        boolean success = false;
+        try {
+            FieldReflectionUtil.toEnum(null, "name");
+        } catch (IllegalArgumentException ex) {
+            success = true;
+        }
+        assertTrue(
+                "toEnum accepted a null parameter for field, expected an IllegalArgumentException",
+                success);
+
+        success = false;
+        try {
+
+            FieldReflectionUtil.toEnum(TestClass.class.getField("s"), null);
+
+        } catch (NoSuchFieldException ex) {
+
+            ex.printStackTrace();
+            fail("could not get field 's' from TestClass.");
+
+        } catch (IllegalArgumentException ex) {
+
+            success = true;
+        }
+
+        assertTrue(
+                "toEnum accepted a null parameter for enumName, expected an IllegalArgumentException",
+                success);
+
+        success = false;
+        try {
+
+            FieldReflectionUtil.toEnum(TestClass.class.getField("s"), "");
+
+        } catch (NoSuchFieldException ex) {
+
+            ex.printStackTrace();
+            fail("could not get field 's' from TestClass.");
+
+        } catch (IllegalArgumentException ex) {
+
+            success = true;
+        }
+
+        assertTrue(
+                "toEnum accepted an empty string for enumName, expected an IllegalArgumentException",
+                success);
+
+        success = false;
+        try {
+
+            FieldReflectionUtil.toEnum(TestClass.class.getField("s"), "name");
+
+        } catch (NoSuchFieldException ex) {
+
+            ex.printStackTrace();
+            fail("could not get field 's' from TestClass.");
+
+        } catch (IllegalArgumentException ex) {
+
+            success = true;
+        }
+
+        assertTrue(
+                "toEnum a field that was not an Enum object, expected an IllegalArgumentException",
+                success);
+
+        success = false;
+        try {
+
+            FieldReflectionUtil.toEnum(TestClass.class.getField("mEnum"), "FOUR");
+
+        } catch (NoSuchFieldException ex) {
+
+            ex.printStackTrace();
+            fail("could not get field 'mEnum' from TestClass.");
+
+        } catch (IllegalArgumentException ex) {
+
+            success = true;
+        }
+
+        assertTrue(
+                "toEnum accepted a bad value for enumName, expected an IllegalArgumentException",
+                success);
+
+        try {
+
+            Enum<?> result = FieldReflectionUtil.toEnum(TestClass.class.getField("mEnum"), "ONE");
+            assertTrue("toEnum returned class " + result.getClass().getName() + ", expected "
+                    + EnumTestClass.class.getName(), result.getClass() == EnumTestClass.class);
+
+        } catch (NoSuchFieldException ex) {
+
+            ex.printStackTrace();
+            fail("could not get field 's' from TestClass.");
 
         }
 

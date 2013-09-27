@@ -25,6 +25,8 @@ import java.util.List;
 
 public class TestClass {
 
+    public EnumTestClass mEnum = EnumTestClass.ONE;
+
     public static final int SIZE = 10;
     public static final char[] CHAR_TABLE = {
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'
@@ -77,6 +79,7 @@ public class TestClass {
             NoSuchFieldException {
 
         List<Field> result = new ArrayList<Field>();
+        result.add(TestClass.class.getField("mEnum"));
         result.add(TestClass.class.getField("byteCollection"));
         result.add(TestClass.class.getField("shortCollection"));
         result.add(TestClass.class.getField("intCollection"));

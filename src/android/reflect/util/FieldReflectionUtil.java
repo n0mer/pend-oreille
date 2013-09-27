@@ -114,6 +114,11 @@ public final class FieldReflectionUtil {
      * @since 1.0
      */
     public static Enum<?> toEnum(Field field, String enumName) {
+
+        if (field == null) {
+            throw new IllegalArgumentException("field cannot be null");
+        }
+
         if (enumName == null || enumName.trim().length() == 0) {
             throw new IllegalArgumentException("enumName cannot be null or empty");
         }
