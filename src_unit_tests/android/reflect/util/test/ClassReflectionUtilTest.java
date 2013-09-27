@@ -2,7 +2,11 @@
 package android.reflect.util.test;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import junit.framework.TestCase;
@@ -17,7 +21,7 @@ public class ClassReflectionUtilTest extends TestCase {
      * 
      * @since 1.0
      */
-    private static Class<?>[] PRIMITIVE_CLASSES = {
+    public static Class<?>[] PRIMITIVE_CLASSES = {
             Byte.class,
             Short.class,
             Integer.class,
@@ -37,6 +41,9 @@ public class ClassReflectionUtilTest extends TestCase {
 
     };
 
+    public static List<Class<?>> primitiveClassList = Collections.unmodifiableList(Arrays
+            .asList(PRIMITIVE_CLASSES));
+
     /**
      * The list of primitive array classes.
      * 
@@ -53,6 +60,9 @@ public class ClassReflectionUtilTest extends TestCase {
             char[].class, Character[].class
     };
 
+    public static List<Class<?>> primitiveArrayClassList = Collections.unmodifiableList(Arrays
+            .asList(PRIMITIVE_ARRAY_CLASSES));
+
     /**
      * Some arbitrary classes to test cases with.
      * 
@@ -65,6 +75,20 @@ public class ClassReflectionUtilTest extends TestCase {
             Activity.class,
             Intent.class
     };
+    public static List<Class<?>> nonPrimitiveClassList = Collections.unmodifiableList(Arrays
+            .asList(NONPRIMITIVE_CLASSES));
+
+    public static List<Class<?>> allClasses;
+
+    {
+        allClasses = new ArrayList<Class<?>>();
+
+        allClasses.addAll(primitiveClassList);
+        allClasses.addAll(primitiveArrayClassList);
+        allClasses.addAll(nonPrimitiveClassList);
+        allClasses = Collections.unmodifiableList(allClasses);
+
+    }
 
     /**
      * Ensures that ClassReflectionUtil.isPrimitiverOrArray and isPrimitiveArray

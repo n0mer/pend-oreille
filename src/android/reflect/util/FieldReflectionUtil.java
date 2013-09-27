@@ -47,12 +47,13 @@ public final class FieldReflectionUtil {
      * 
      * @param fieldMap the fieldMap to read
      * @return a new map
+     * @throws IllegalArgumentException if fieldMap is null.
      * @since 1.0
      */
     public static Map<Field, Object> removePrimitivesAndArrays(Map<Field, Object> fieldMap) {
 
         if (fieldMap == null) {
-            return null;
+            throw new IllegalArgumentException("fieldMap cannot be null");
         }
 
         Map<Field, Object> result = new Hashtable<Field, Object>();
@@ -78,10 +79,20 @@ public final class FieldReflectionUtil {
      * @param types insert into the new map all {@link Field} entries that are
      *            not in this list.
      * @return a new map.
+     * @throws IllegalArgumentException if fieldMap or types is null.
      * @since 1.0
      */
     public static Map<Field, Object> removeFieldTypes(Map<Field, Object> fieldMap,
             List<Class<?>> types) {
+
+        if (fieldMap == null) {
+            throw new IllegalArgumentException("fieldMap cannot be null");
+        }
+
+        if (types == null) {
+            throw new IllegalArgumentException("types cannot be null");
+        }
+
         Map<Field, Object> result = new Hashtable<Field, Object>();
 
         for (Entry<Field, Object> e : fieldMap.entrySet()) {
