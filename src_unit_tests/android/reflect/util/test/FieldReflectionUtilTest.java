@@ -9,6 +9,7 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 import android.reflect.util.FieldReflectionUtil;
+import android.reflect.util.test.model.TestClass;
 
 /**
  * Test {@link FieldReflectionUtil}.

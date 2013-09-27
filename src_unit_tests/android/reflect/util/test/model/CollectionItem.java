@@ -1,5 +1,5 @@
 
-package android.reflect.util.test;
+package android.reflect.util.test.model;
 
 public class CollectionItem {
 
