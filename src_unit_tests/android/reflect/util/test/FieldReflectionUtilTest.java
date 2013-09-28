@@ -2,12 +2,14 @@
 package android.reflect.util.test;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import junit.framework.TestCase;
+import android.reflect.util.ClassReflectionUtil;
 import android.reflect.util.FieldReflectionUtil;
 import android.reflect.util.test.model.EnumTestClass;
 import android.reflect.util.test.model.TestClass;
@@ -97,6 +99,9 @@ public class FieldReflectionUtilTest extends TestCase {
 
     }
 
+    /**
+     * Test {@link FieldReflectionUtil#removeFieldTypes(Map, List)}.
+     */
     public void testRemoveFieldTypes() {
 
         boolean success = false;
@@ -163,6 +168,9 @@ public class FieldReflectionUtilTest extends TestCase {
 
     }
 
+    /**
+     * Test {@link FieldReflectionUtil#toEnum(Field, String)}.
+     */
     public void testToEnum() {
         boolean success = false;
         try {
@@ -262,6 +270,69 @@ public class FieldReflectionUtilTest extends TestCase {
             fail("could not get field 's' from TestClass.");
 
         }
+
+    }
+
+    /**
+     * Test {@link FieldReflectionUtil#getFieldValues(Class, Object)}.
+     */
+    public void testGetFieldValues() {
+
+        boolean success = false;
+        try {
+
+            FieldReflectionUtil.getFieldValues(null, new Object());
+
+        } catch (IllegalArgumentException ex) {
+            success = true;
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            fail();
+        }
+
+        assertTrue(
+                "getFieldValues accepted a null value for class. Expected IllegalArgumentException",
+                success);
+
+        success = false;
+        try {
+
+            FieldReflectionUtil.getFieldValues(TestClass.class, null);
+
+        } catch (IllegalArgumentException ex) {
+            success = true;
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            fail();
+        }
+
+        assertTrue(
+                "getFieldValues accepted a null value for object. Expected IllegalArgumentException",
+                success);
+
+        try {
+            Map<Field, Object> fieldValues = FieldReflectionUtil.getFieldValues(TestClass.class,
+                    new TestClass());
+            assertTrue("not all field values were returned. Found " + fieldValues.size()
+                    + ", expected " + fields.size(), fieldValues.size() == fields.size());
+        } catch (IllegalArgumentException e) {
+
+            fail(e.getMessage());
+
+        } catch (IllegalAccessException e) {
+
+            fail(e.getMessage());
+
+        }
+
+    }
+
+    public void testGetAllFields() {
+        List<Field> result = FieldReflectionUtil.getAllFields(TestClass.class, Modifier.STATIC);
+
+        assertTrue(
+                "Found " + result.size() + " fields. Expected 2.",
+                result.size() == 2);
 
     }
 }
