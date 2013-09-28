@@ -20,7 +20,7 @@
 package android.lang.util;
 
 /**
- * Contains functions required by {@link PrimitiveHelper}.
+ * Contains functions required by {@link MemoryMappedPrimitive}.
  * 
  * @author Richard Schilling
  * @since 1.0
