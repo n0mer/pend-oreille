@@ -22,6 +22,7 @@ package android.reflect.util;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
@@ -137,7 +138,9 @@ public final class FieldReflectionUtil {
     }
 
     /**
-     * Returns the values of all fields in a class and its superclasses.
+     * Returns the values of all fields in a class and its superclasses. If the
+     * field in instance {@code object} is {@code null} then {@code null} is
+     * inserted into the map value.
      * 
      * @param c the class to get fields for
      * @param object the instance of class that field values should be fetched
@@ -159,7 +162,7 @@ public final class FieldReflectionUtil {
             throw new IllegalArgumentException("object cannot be null");
         }
 
-        Hashtable<Field, Object> result = new Hashtable<Field, Object>();
+        Map<Field, Object> result = new HashMap<Field, Object>();
         /*
          * derive field names and field values
          */

@@ -313,8 +313,14 @@ public class FieldReflectionUtilTest extends TestCase {
         try {
             Map<Field, Object> fieldValues = FieldReflectionUtil.getFieldValues(TestClass.class,
                     new TestClass());
+
+            /*
+             * fieldValues should contain a value for every Field object in the
+             * member fields plus two additional. The two additional fields are
+             * static final fields.
+             */
             assertTrue("not all field values were returned. Found " + fieldValues.size()
-                    + ", expected " + fields.size(), fieldValues.size() == fields.size());
+                    + ", expected " + fields.size() + 2, fieldValues.size() == fields.size() + 2);
         } catch (IllegalArgumentException e) {
 
             fail(e.getMessage());
@@ -327,12 +333,20 @@ public class FieldReflectionUtilTest extends TestCase {
 
     }
 
+    /**
+     * Test {@link FieldReflectionUtil#getAllFields(Class, int)}.
+     */
     public void testGetAllFields() {
-        List<Field> result = FieldReflectionUtil.getAllFields(TestClass.class, Modifier.STATIC);
+
+        /*
+         * There are 39 fields - 38 are public and one of them is private.
+         * Filter all the public fields.
+         */
+        List<Field> result = FieldReflectionUtil.getAllFields(TestClass.class, Modifier.PUBLIC);
 
         assertTrue(
-                "Found " + result.size() + " fields. Expected 2.",
-                result.size() == 2);
+                "Found " + result.size() + " fields. Expected 1.",
+                result.size() == 1);
 
     }
 }

@@ -27,6 +27,8 @@ public class TestClass {
 
     public EnumTestClass mEnum = EnumTestClass.ONE;
 
+    private Integer privateInteger = new Integer(55);
+
     public static final int SIZE = 10;
     public static final char[] CHAR_TABLE = {
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'
