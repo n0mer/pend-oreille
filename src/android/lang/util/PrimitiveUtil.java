@@ -48,6 +48,10 @@ public final class PrimitiveUtil {
             throw new IllegalArgumentException("array cannot be null");
         }
 
+        if (array.length == 0) {
+            throw new IllegalArgumentException("array length must be > 0");
+        }
+
         if (div <= 0) {
             throw new IllegalArgumentException("div must be >= 0");
         }
