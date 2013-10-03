@@ -227,8 +227,8 @@ public final class PrimitiveUtil {
     /* default */static final int toInt(byte[] array, int start) {
         throwIfBadArraySize(array, start, 4);
 
-        int i1 = toShort(array, start);
-        int i2 = toShort(array, start + 2);
+        int i1 = (int) (toShort(array, start) & 0xFFFF);
+        int i2 = (int) (toShort(array, start + 2) & 0xFFFF);
 
         return (i1 << 16) | i2;
 
@@ -237,10 +237,21 @@ public final class PrimitiveUtil {
     /* default */static final long toLong(byte[] array, int start) {
         throwIfBadArraySize(array, start, 8);
 
-        long l1 = toInt(array, start);
-        long l2 = toInt(array, start + 4);
+        long i1 = (long) toInt(array, start);
+        long b1 = (long) (array[start + 4] & 0xFF);
+        long b2 = (long) (array[start + 5] & 0xFF);
+        long b3 = (long) (array[start + 6] & 0xFF);
+        long b4 = (long) (array[start + 7] & 0xFF);
 
-        return (l1 << 32) | l2;
+        /*
+         * long l1 = (long) (toInt(array, start) & 0xFFFFFFFF) << 32; long l2 =
+         * (long) (toInt(array, start + 4) & 0xFFFFFFFF); long result = ((long)
+         * l1) | l2;
+         */
+
+        long result = (i1 << 32) | (b1 << 24) | (b2 << 16) | (b3 << 8) | b4;
+
+        return result;
 
     }
 
