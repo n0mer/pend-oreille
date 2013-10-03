@@ -6,9 +6,11 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import junit.framework.TestCase;
+import android.annotation.SuppressLint;
 import android.reflect.util.test.model.TestClass;
 import android.util.Log;
 
+@SuppressLint("DefaultLocale")
 public class PrimitiveUtilTest extends TestCase {
 
     private static final String LOG_TAG = "PRIMITIVEUTILTEST";
@@ -350,37 +352,331 @@ public class PrimitiveUtilTest extends TestCase {
                 success);
     }
 
-    public void testToLong() {
+    private void assertEqualArrays(byte[] control, byte[] underTest) {
+        for (int i = 0; i < control.length; i++) {
+            assertTrue(String.format("bad byte generation at position %d. Found %d, expecting %d",
+                    i, underTest[i], control[i]), underTest[i] == control[i]);
 
-        long value = Long.MAX_VALUE;
+        }
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream(8);
-        DataOutputStream dos = new DataOutputStream(baos);
+    }
+
+    /**
+     * test serialization and deserialization of a type of value.
+     */
+    public void testToShort() {
+        runToShort(Short.MIN_VALUE);
+        runToShort(Short.MAX_VALUE);
+    }
+
+    private void runToShort(short value) {
+
         try {
-            dos.writeLong(value);
+
+            /*
+             * set size
+             */
+            int size = 2;
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream(size);
+            DataOutputStream dos = new DataOutputStream(baos);
+
+            /*
+             * write value to stream
+             */
+            dos.writeShort(value);
+
+            byte[] testBytes = new byte[size];
+            PrimitiveUtil.toBytes(value, testBytes, 0);
+
+            assertEqualArrays(baos.toByteArray(), testBytes);
+
+            /*
+             * deserizliaze the value
+             */
+            short deserializedValue = PrimitiveUtil.toShort(testBytes, 0);
+
+            assertTrue(String.format("deserialization failed. Found %d, expecting %d",
+                    deserializedValue, value), deserializedValue == value);
+
         } catch (IOException e) {
             e.printStackTrace();
             fail(e.getMessage());
         }
 
-        byte[] baosBytes = baos.toByteArray();
+    }
 
-        byte[] longBytes = new byte[8];
-        PrimitiveUtil.toBytes(value, longBytes, 0);
+    /**
+     * test serialization and deserialization of a type of value.
+     */
+    public void testToInt() {
+        runToInt(Integer.MIN_VALUE);
+        runToInt(Integer.MAX_VALUE);
+    }
 
-        for (int i = 0; i < baosBytes.length; i++) {
-            assertTrue(String.format("bad byte generation at position %d. Found %d, expecting %d",
-                    i, longBytes[i], baosBytes[i]), longBytes[i] == baosBytes[i]);
+    private void runToInt(int value) {
 
+        try {
+
+            /*
+             * set size
+             */
+            int size = 4;
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream(size);
+            DataOutputStream dos = new DataOutputStream(baos);
+
+            /*
+             * write value to stream
+             */
+            dos.writeInt(value);
+
+            byte[] testBytes = new byte[size];
+            PrimitiveUtil.toBytes(value, testBytes, 0);
+
+            assertEqualArrays(baos.toByteArray(), testBytes);
+
+            /*
+             * deserizliaze the value
+             */
+            int deserializedValue = PrimitiveUtil.toInt(testBytes, 0);
+
+            assertTrue(String.format("deserialization failed. Found %d, expecting %d",
+                    deserializedValue, value), deserializedValue == value);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail(e.getMessage());
         }
-
-        long deserializedLong = PrimitiveUtil.toLong(longBytes, 0);
-
-        assertTrue(String.format("deserialization failed. Found %d, expecting %d",
-                deserializedLong, value), deserializedLong == value);
 
     }
 
+    /**
+     * test serialization and deserialization of a type of value.
+     */
+    public void testToLong() {
+        runToLong(Long.MIN_VALUE);
+        runToLong(Long.MAX_VALUE);
+    }
+
+    private void runToLong(long value) {
+
+        try {
+
+            /*
+             * set size
+             */
+            int size = 8;
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream(size);
+            DataOutputStream dos = new DataOutputStream(baos);
+
+            /*
+             * write value to stream
+             */
+            dos.writeLong(value);
+
+            byte[] testBytes = new byte[size];
+            PrimitiveUtil.toBytes(value, testBytes, 0);
+
+            assertEqualArrays(baos.toByteArray(), testBytes);
+
+            /*
+             * deserizliaze the value
+             */
+            long deserializedValue = PrimitiveUtil.toLong(testBytes, 0);
+
+            assertTrue(String.format("deserialization failed. Found %d, expecting %d",
+                    deserializedValue, value), deserializedValue == value);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail(e.getMessage());
+        }
+
+    }
+
+    /**
+     * test serialization and deserialization of a type of value.
+     */
+    public void testToFloat() {
+        runToFloat(Float.MIN_VALUE);
+        runToFloat(Float.MAX_VALUE);
+    }
+
+    private void runToFloat(float value) {
+
+        try {
+
+            /*
+             * set size
+             */
+            int size = 4;
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream(size);
+            DataOutputStream dos = new DataOutputStream(baos);
+
+            /*
+             * write value to stream
+             */
+            dos.writeFloat(value);
+
+            byte[] testBytes = new byte[size];
+            PrimitiveUtil.toBytes(value, testBytes, 0);
+
+            assertEqualArrays(baos.toByteArray(), testBytes);
+
+            /*
+             * deserizliaze the value
+             */
+            float deserializedValue = PrimitiveUtil.toFloat(testBytes, 0);
+
+            assertTrue(String.format("deserialization failed. Found %f, expecting %f",
+                    deserializedValue, value), deserializedValue == value);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail(e.getMessage());
+        }
+
+    }
+
+    /**
+     * test serialization and deserialization of a type of value.
+     */
+    public void testToDouble() {
+        runToDouble(Float.MIN_VALUE);
+        runToDouble(Float.MAX_VALUE);
+    }
+
+    private void runToDouble(double value) {
+
+        try {
+
+            /*
+             * set size
+             */
+            int size = 8;
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream(size);
+            DataOutputStream dos = new DataOutputStream(baos);
+
+            /*
+             * write value to stream
+             */
+            dos.writeDouble(value);
+
+            byte[] testBytes = new byte[size];
+            PrimitiveUtil.toBytes(value, testBytes, 0);
+
+            assertEqualArrays(baos.toByteArray(), testBytes);
+
+            /*
+             * deserizliaze the value
+             */
+            double deserializedValue = PrimitiveUtil.toDouble(testBytes, 0);
+
+            assertTrue(String.format("deserialization failed. Found %f, expecting %f",
+                    deserializedValue, value), deserializedValue == value);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail(e.getMessage());
+        }
+
+    }
+
+    /**
+     * test serialization and deserialization of a type of value.
+     */
+    public void testToBoolean() {
+        runToBoolean(Boolean.TRUE);
+        runToBoolean(Boolean.FALSE);
+    }
+
+    private void runToBoolean(boolean value) {
+
+        try {
+
+            /*
+             * set size
+             */
+            int size = 1;
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream(size);
+            DataOutputStream dos = new DataOutputStream(baos);
+
+            /*
+             * write value to stream
+             */
+            dos.writeBoolean(value);
+
+            byte[] testBytes = new byte[size];
+            PrimitiveUtil.toBytes(value, testBytes, 0);
+
+            assertEqualArrays(baos.toByteArray(), testBytes);
+
+            /*
+             * deserizliaze the value
+             */
+            boolean deserializedValue = PrimitiveUtil.toBoolean(testBytes, 0);
+
+            assertTrue(String.format("deserialization failed. Found %s, expecting %s",
+                    deserializedValue, value), deserializedValue == value);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail(e.getMessage());
+        }
+
+    }
+
+    /**
+     * test serialization and deserialization of a type of value.
+     */
+    public void testToChar() {
+        runToChar(Character.MIN_VALUE);
+        runToChar(Character.MAX_VALUE);
+    }
+
+    private void runToChar(char value) {
+
+        try {
+
+            /*
+             * set size
+             */
+            int size = 2;
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream(size);
+            DataOutputStream dos = new DataOutputStream(baos);
+
+            /*
+             * write value to stream
+             */
+            dos.writeChar(value);
+
+            byte[] testBytes = new byte[size];
+            PrimitiveUtil.toBytes(value, testBytes, 0);
+
+            assertEqualArrays(baos.toByteArray(), testBytes);
+
+            /*
+             * deserizliaze the value
+             */
+            char deserializedValue = PrimitiveUtil.toChar(testBytes, 0);
+
+            assertTrue(String.format("deserialization failed. Found %s, expecting %s",
+                    deserializedValue, value), deserializedValue == value);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail(e.getMessage());
+        }
+
+    }
+
+    @SuppressLint("DefaultLocale")
     public void testToShortArray() {
         byte[] test = generateBytes(short.class);
         short[] control = generateShortArray();
@@ -468,13 +764,6 @@ public class PrimitiveUtilTest extends TestCase {
 
     public void testToDoubleArray() {
         byte[] dataOutputStreamGeneratedBytes = generateBytes(double.class);
-        long longBits = Double.doubleToLongBits(-10000.0d);
-        double knownDouble = Double.longBitsToDouble(longBits);
-
-        byte[] longBytes = new byte[8];
-        PrimitiveUtil.toBytes(knownDouble, longBytes, 0);
-        long decodedLongBits = PrimitiveUtil.toLong(longBytes, 0);
-        double singleDoubleDecoded = Double.longBitsToDouble(decodedLongBits);
 
         double[] control = generateDoubleArray();
         byte[] controlBytes = PrimitiveUtil.toBytes(control);
