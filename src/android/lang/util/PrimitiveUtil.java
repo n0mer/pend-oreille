@@ -267,6 +267,14 @@ public final class PrimitiveUtil {
 
     }
 
+    /* default */static final boolean toBoolean(byte[] array, int start) {
+
+        throwIfBadArraySize(array, start, 1);
+
+        return array[start] != 0 ? true : false;
+
+    }
+
     /* default */static final char toChar(byte[] array, int start) {
 
         throwIfBadArraySize(array, start, 2);
