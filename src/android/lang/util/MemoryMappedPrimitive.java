@@ -221,7 +221,6 @@ public final class MemoryMappedPrimitive {
      * @since 1.0
      */
     public MemoryMappedPrimitive(short[] value) {
-        mArray = new byte[2];
         set(value);
     }
 
@@ -233,7 +232,6 @@ public final class MemoryMappedPrimitive {
      * @since 1.0
      */
     public MemoryMappedPrimitive(int[] value) {
-        mArray = new byte[4];
         set(value);
     }
 
@@ -245,7 +243,6 @@ public final class MemoryMappedPrimitive {
      * @since 1.0
      */
     public MemoryMappedPrimitive(long[] value) {
-        mArray = new byte[8];
         set(value);
     }
 
@@ -257,7 +254,6 @@ public final class MemoryMappedPrimitive {
      * @since 1.0
      */
     public MemoryMappedPrimitive(float[] value) {
-        mArray = new byte[4];
         set(value);
     }
 
@@ -269,7 +265,6 @@ public final class MemoryMappedPrimitive {
      * @since 1.0
      */
     public MemoryMappedPrimitive(double[] value) {
-        mArray = new byte[8];
         set(value);
     }
 
@@ -281,7 +276,6 @@ public final class MemoryMappedPrimitive {
      * @since 1.0
      */
     public MemoryMappedPrimitive(boolean[] value) {
-        mArray = new byte[1];
         set(value);
     }
 
@@ -293,7 +287,6 @@ public final class MemoryMappedPrimitive {
      * @since 1.0
      */
     public MemoryMappedPrimitive(char[] value) {
-        mArray = new byte[2];
         set(value);
     }
 
