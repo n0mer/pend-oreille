@@ -16,7 +16,7 @@ public class PrimitiveUtilTest extends TestCase {
     private static final String LOG_TAG = "PRIMITIVEUTILTEST";
     private static final int MIN_VALUE = -10000;
     private static final int MAX_VALUE = 10000;
-    public static final int SIZE = 20; // 20000;
+    public static final int SIZE = 20000;
 
     private char[] charset = {
             '\u0021', '\u0022',
